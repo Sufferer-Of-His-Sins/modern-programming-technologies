@@ -2,7 +2,14 @@ name: CI
 
 on:
   push:
+    paths: ['lab6/**', '.github/workflows/ci.yml']
   pull_request:
+    paths: ['lab6/**', '.github/workflows/ci.yml']
+
+defaults:
+  run:
+    shell: bash
+    working-directory: lab6
 
 jobs:
   build-test:
@@ -14,35 +21,35 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Cache dependencies
+      - name: Cache ccache
+        if: runner.os != 'Windows'
         uses: actions/cache@v4
         with:
-          path: build/_deps
-          key: ${{ runner.os }}-deps-${{ hashFiles('**/CMakeLists.txt', 'cmake/**') }}
-          restore-keys: |
-            ${{ runner.os }}-deps-
+          path: ~/.cache/ccache
+          key: ${{ runner.os }}-ccache-${{ hashFiles('lab6/CMakeLists.txt', 'lab6/third_party/**') }}
+          restore-keys: ${{ runner.os }}-ccache-
 
-      - name: Install dependencies (Linux)
+      - name: Install ccache (Linux)
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y cmake g++
+        run: sudo apt-get update && sudo apt-get install -y ccache
 
-      - name: Install dependencies (macOS)
+      - name: Install ccache (macOS)
         if: runner.os == 'macOS'
-        run: brew install cmake
+        run: brew install ccache
 
       - name: Configure
-        shell: bash
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17
+        run: |
+          if [ "$RUNNER_OS" != "Windows" ]; then
+            LAUNCHER="-DCMAKE_CXX_COMPILER_LAUNCHER=ccache"
+          fi
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 $LAUNCHER
 
       - name: Build
-        shell: bash
         run: cmake --build build --config Release
 
       - name: Test
-        shell: bash
         run: ctest --test-dir build -C Release --output-on-failure --output-junit test-results.xml
 
       - name: Upload test report
@@ -50,4 +57,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.os }}
-          path: build/test-results.xml
+          path: lab6/build/test-results.xml
