@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: pickup_db
+    environment:
+      POSTGRES_DB: pickup
+      POSTGRES_USER: pickup_user
+      POSTGRES_PASSWORD: pickup_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pickup_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+
+volumes:
+  pickup_data:
