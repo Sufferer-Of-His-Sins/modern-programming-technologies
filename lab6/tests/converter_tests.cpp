@@ -45,6 +45,9 @@ TEST(Converter, YamlToJson) {
 TEST(Converter, YmlExtensionAccepted) {
     const auto result = json::parse(convert_text("- name: Eva\n", "yml", "json"));
     EXPECT_EQ(result[0]["name"], "Eva");
+    #ifdef __linux__
+        FAIL() << "ошибка";
+    #endif
 }
 
 TEST(Converter, CsvWrongColumnCount) {
