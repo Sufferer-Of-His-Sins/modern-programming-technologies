@@ -11,6 +11,9 @@ defaults:
     shell: bash
     working-directory: lab6
 
+
+
+
 jobs:
   build-test:
     name: ${{ matrix.os }}
