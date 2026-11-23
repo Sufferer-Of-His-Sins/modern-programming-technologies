@@ -66,4 +66,4 @@ void ProductService::validate(const std::string& name, double price, int quantit
     }
 }
 
-} // namespace service
+}

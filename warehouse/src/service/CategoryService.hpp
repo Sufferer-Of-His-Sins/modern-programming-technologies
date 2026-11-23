@@ -24,4 +24,4 @@ private:
     void validateName(const std::string& name) const;
 };
 
-} // namespace service
+}
