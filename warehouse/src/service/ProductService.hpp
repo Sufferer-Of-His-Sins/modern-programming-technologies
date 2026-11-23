@@ -34,4 +34,4 @@ private:
     void validate(const std::string& name, double price, int quantity, int category_id) const;
 };
 
-} // namespace service
+}
