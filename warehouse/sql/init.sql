@@ -1,5 +1,3 @@
--- init.sql — схема базы данных для приложения «Склад / Магазин»
-
 DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS suppliers CASCADE;
@@ -26,12 +24,10 @@ CREATE TABLE products (
     supplier_id INTEGER REFERENCES suppliers(id) ON DELETE SET NULL
 );
 
--- Индексы для ускорения выборок
 CREATE INDEX idx_products_category ON products(category_id);
 CREATE INDEX idx_products_supplier ON products(supplier_id);
 CREATE INDEX idx_products_quantity ON products(quantity);
 
--- Начальные данные
 INSERT INTO categories (name, description) VALUES
     ('Электроника', 'Смартфоны, ноутбуки, аксессуары'),
     ('Одежда', 'Мужская и женская одежда'),
