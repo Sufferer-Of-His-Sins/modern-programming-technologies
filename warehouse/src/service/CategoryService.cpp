@@ -2,8 +2,7 @@
 
 namespace service {
 
-CategoryService::CategoryService(repository::ICategoryRepositoryPtr repo)
-    : repo_(std::move(repo)) {}
+CategoryService::CategoryService(repository::ICategoryRepositoryPtr repo): repo_(std::move(repo)) {}
 
 std::vector<domain::Category> CategoryService::getAll() const {
     return repo_->findAll();

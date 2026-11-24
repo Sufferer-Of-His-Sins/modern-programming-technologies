@@ -10,7 +10,7 @@ namespace service {
 
 class SupplierService {
 public:
-    explicit SupplierService(repository::ISupplierRepositoryPtr repo);
+    SupplierService(repository::ISupplierRepositoryPtr repo);
 
     std::vector<domain::Supplier> getAll() const;
     std::optional<domain::Supplier> getById(int id) const;

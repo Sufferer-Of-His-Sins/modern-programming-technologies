@@ -3,8 +3,7 @@
 
 namespace repository {
 
-PgProductRepository::PgProductRepository(std::shared_ptr<pqxx::connection> conn)
-    : conn_(std::move(conn)) {}
+PgProductRepository::PgProductRepository(std::shared_ptr<pqxx::connection> conn): conn_(std::move(conn)) {}
 
 domain::Product PgProductRepository::rowToProduct(const pqxx::row& row) const {
     domain::Product p;

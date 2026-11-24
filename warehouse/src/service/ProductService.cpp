@@ -2,9 +2,7 @@
 
 namespace service {
 
-ProductService::ProductService(repository::IProductRepositoryPtr productRepo,
-                               repository::ICategoryRepositoryPtr categoryRepo)
-    : productRepo_(std::move(productRepo))
+ProductService::ProductService(repository::IProductRepositoryPtr productRepo,repository::ICategoryRepositoryPtr categoryRepo): productRepo_(std::move(productRepo))
     , categoryRepo_(std::move(categoryRepo)) {}
 
 std::vector<domain::Product> ProductService::getAll() const {
@@ -26,15 +24,13 @@ std::vector<domain::Product> ProductService::getLowStock(int threshold) const {
     return productRepo_->findLowStock(threshold);
 }
 
-int ProductService::create(const std::string& name, double price, int quantity,
-                           int category_id, std::optional<int> supplier_id) {
+int ProductService::create(const std::string& name, double price, int quantity,int category_id, std::optional<int> supplier_id) {
     validate(name, price, quantity, category_id);
     domain::Product p{0, name, price, quantity, category_id, supplier_id};
     return productRepo_->create(p);
 }
 
-void ProductService::update(int id, const std::string& name, double price, int quantity,
-                            int category_id, std::optional<int> supplier_id) {
+void ProductService::update(int id, const std::string& name, double price, int quantity,int category_id, std::optional<int> supplier_id) {
     validate(name, price, quantity, category_id);
     if (!productRepo_->findById(id)) {
         throw std::runtime_error("Товар не найден");

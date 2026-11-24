@@ -3,8 +3,7 @@
 
 namespace repository {
 
-PgCategoryRepository::PgCategoryRepository(std::shared_ptr<pqxx::connection> conn)
-    : conn_(std::move(conn)) {}
+PgCategoryRepository::PgCategoryRepository(std::shared_ptr<pqxx::connection> conn): conn_(std::move(conn)) {}
 
 std::vector<domain::Category> PgCategoryRepository::findAll() {
     try {

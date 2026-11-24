@@ -2,16 +2,9 @@
 
 namespace service {
 
-LowStockMonitor::LowStockMonitor(std::shared_ptr<ProductService> productService,
-                                 int threshold,
-                                 std::chrono::seconds interval,
-                                 ResultCallback onResult,
-                                 ErrorCallback onError)
-    : productService_(std::move(productService))
-    , threshold_(threshold)
-    , interval_(interval)
-    , onResult_(std::move(onResult))
-    , onError_(std::move(onError)) {}
+LowStockMonitor::LowStockMonitor(std::shared_ptr<ProductService> productService,int threshold,std::chrono::seconds interval,ResultCallback onResult,ErrorCallback onError)
+    : productService_(std::move(productService)), threshold_(threshold), interval_(interval)
+    , onResult_(std::move(onResult)), onError_(std::move(onError)) {}
 
 LowStockMonitor::~LowStockMonitor() {
     stop();

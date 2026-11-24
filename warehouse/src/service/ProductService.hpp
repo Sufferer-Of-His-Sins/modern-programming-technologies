@@ -11,19 +11,16 @@ namespace service {
 
 class ProductService {
 public:
-    ProductService(repository::IProductRepositoryPtr productRepo,
-                   repository::ICategoryRepositoryPtr categoryRepo);
+    ProductService(repository::IProductRepositoryPtr productRepo, repository::ICategoryRepositoryPtr categoryRepo);
 
     std::vector<domain::Product> getAll() const;
     std::optional<domain::Product> getById(int id) const;
     std::vector<domain::Product> getByCategory(int category_id) const;
     std::vector<domain::Product> getLowStock(int threshold = 10) const;
 
-    int create(const std::string& name, double price, int quantity,
-               int category_id, std::optional<int> supplier_id = std::nullopt);
+    int create(const std::string& name, double price, int quantity,int category_id, std::optional<int> supplier_id = std::nullopt);
 
-    void update(int id, const std::string& name, double price, int quantity,
-                int category_id, std::optional<int> supplier_id = std::nullopt);
+    void update(int id, const std::string& name, double price, int quantity,int category_id, std::optional<int> supplier_id = std::nullopt);
 
     void remove(int id);
 

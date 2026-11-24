@@ -12,8 +12,7 @@ struct Supplier {
 
     Supplier() = default;
 
-    Supplier(int id, std::string name, std::string contact, std::string phone)
-        : id(id), name(std::move(name)), contact(std::move(contact)), phone(std::move(phone)) {}
+    Supplier(int id, std::string name, std::string contact, std::string phone): id(id), name(std::move(name)), contact(std::move(contact)), phone(std::move(phone)) {}
 };
 
 }

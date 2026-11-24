@@ -18,14 +18,9 @@ struct Product {
 
     Product() = default;
 
-    Product(int id, std::string name, double price, int quantity,
-            int category_id, std::optional<int> supplier_id = std::nullopt)
-        : id(id)
-        , name(std::move(name))
-        , price(price)
-        , quantity(quantity)
-        , category_id(category_id)
-        , supplier_id(supplier_id) {}
+    Product(int id, std::string name, double price, int quantity,int category_id, std::optional<int> supplier_id = std::nullopt): id(id)
+        , name(std::move(name)), price(price), quantity(quantity)
+        , category_id(category_id), supplier_id(supplier_id) {}
 };
 
 }

@@ -10,7 +10,7 @@ namespace service {
 
 class CategoryService {
 public:
-    explicit CategoryService(repository::ICategoryRepositoryPtr repo);
+    CategoryService(repository::ICategoryRepositoryPtr repo);
 
     std::vector<domain::Category> getAll() const;
     std::optional<domain::Category> getById(int id) const;

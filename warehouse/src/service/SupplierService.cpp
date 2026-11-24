@@ -2,8 +2,7 @@
 
 namespace service {
 
-SupplierService::SupplierService(repository::ISupplierRepositoryPtr repo)
-    : repo_(std::move(repo)) {}
+SupplierService::SupplierService(repository::ISupplierRepositoryPtr repo): repo_(std::move(repo)) {}
 
 std::vector<domain::Supplier> SupplierService::getAll() const {
     return repo_->findAll();
@@ -19,8 +18,7 @@ int SupplierService::create(const std::string& name, const std::string& contact,
     return repo_->create(s);
 }
 
-void SupplierService::update(int id, const std::string& name,
-                             const std::string& contact, const std::string& phone) {
+void SupplierService::update(int id, const std::string& name,const std::string& contact, const std::string& phone) {
     validateName(name);
     if (!repo_->findById(id)) {
         throw std::runtime_error("Поставщик не найден");

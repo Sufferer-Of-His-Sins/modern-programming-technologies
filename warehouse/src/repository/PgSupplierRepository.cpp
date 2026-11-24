@@ -3,8 +3,7 @@
 
 namespace repository {
 
-PgSupplierRepository::PgSupplierRepository(std::shared_ptr<pqxx::connection> conn)
-    : conn_(std::move(conn)) {}
+PgSupplierRepository::PgSupplierRepository(std::shared_ptr<pqxx::connection> conn): conn_(std::move(conn)) {}
 
 std::vector<domain::Supplier> PgSupplierRepository::findAll() {
     try {

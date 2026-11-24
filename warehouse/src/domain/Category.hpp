@@ -11,8 +11,7 @@ struct Category {
 
     Category() = default;
 
-    Category(int id, std::string name, std::string description)
-        : id(id), name(std::move(name)), description(std::move(description)) {}
+    Category(int id, std::string name, std::string description): id(id), name(std::move(name)), description(std::move(description)) {}
 };
 
 }
